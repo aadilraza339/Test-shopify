@@ -1,0 +1,889 @@
+<style>
+              .attryb-faq-page-width {
+                display: flex;
+                justify-content: {{section.settings.faq_position}};
+              }
+              .attryb-faq-container {
+                font-size: {{section.settings.font_size_1}}{{section.settings.font_size_unit}};
+                width: {{section.settings.faq_width}}{{section.settings.faq_width_unit}};
+              }
+              .attryb-faq-tabs {
+                font-family: {{section.settings.faq_ff.family}},{{section.settings.faq_ff.fallback_families}};
+                font-weight: {{section.settings.faq_font_weight}};
+                border-radius: {{section.settings.faq_border_radius}}{{section.settings.border_radius_unit}};
+                padding: {{section.settings.faq_padding}}{{section.settings.faq_padding_unit}};
+                margin: {{section.settings.faq_margin}}{{section.settings.faq_margin_unit}};
+                line-height: {{section.settings.faq_line_height}}{{section.settings.faq_line_height_unit}};
+                border: {{section.settings.faq_border_width}}{{section.settings.faq_border_width_unit}} {{section.settings.faq_border_style}} {{section.settings.faq_border_color}};
+              }
+              .attryb-faq-description {
+                margin-top: 2em;
+                margin-bottom: 2em;
+              }
+
+              .attryb-faq-checkbox {
+                position: absolute;
+                opacity: 0;
+                z-index: -1;
+              }
+
+              .attryb-faq-tabs {
+                overflow: hidden;
+                {% if section.settings.faq_box_shadow_enable == true %}
+                box-shadow: {{section.settings.faq_shadow_hor}}px {{section.settings.faq_shadow_ver}}px {{section.settings.faq_shadow_blur}}px {{section.settings.faq_shadow_spread}}px {{section.settings.faq_shadow_color}};
+                {% else %}
+                box-shadow: none;
+                {% endif %}
+              }
+
+              .attryb-faq-tab {
+                width: 100%;
+                color: white;
+                overflow: hidden;
+              }
+
+              .attryb-faq-tab-label {
+                width: 100%;
+                display: flex;
+                justify-content: space-between;
+                padding: 1em;
+                background: {{section.settings.color_title1}};
+                color: {{section.settings.color_title2}};
+                cursor: pointer;
+                font-weight: {{section.settings.faq_font_weight}};
+              }
+
+              .attryb-faq-tab-content {
+                max-height: 0;
+                padding: 0 1em;
+                transition: all 0.5s ease;
+                background: {{section.settings.color_title3}};
+                color: {{section.settings.color_title4}};
+              }
+
+              .attryb-faq-tab-content p {
+                margin: 0;
+              }
+
+              .attryb-faq-checkbox:checked ~ .attryb-faq-tab-content {
+                max-height: 100vh;
+                padding: 1em;
+              }
+
+              @media screen and (max-width: 768px) {
+                .attryb-faq-page-width {
+                  display: flex;
+                  justify-content: {{section.settings.mobile_faq_position}};
+                }
+                .attryb-faq-container {
+                  font-size: {{section.settings.mobile_font_size_1}}{{section.settings.mobile_font_size_unit}};
+                  width: {{section.settings.mobile_faq_width}}{{section.settings.mobile_faq_width_unit}};
+                }
+                .attryb-faq-tabs {
+                  font-family: {{section.settings.mobile_faq_ff.family}},{{section.settings.mobile_faq_ff.fallback_families}};
+                  font-weight: {{section.settings.mobile_faq_font_weight}};
+                  border-radius: {{section.settings.mobile_faq_border_radius}}{{section.settings.mobile_border_radius_unit}};
+                  padding: {{section.settings.mobile_faq_padding}}{{section.settings.mobile_faq_padding_unit}};
+                  margin: {{section.settings.mobile_faq_margin}}{{section.settings.mobile_faq_margin_unit}};
+                  line-height: {{section.settings.mobile_faq_line_height}}{{section.settings.mobile_faq_line_height_unit}};
+                  border: {{section.settings.mobile_faq_border_width}}{{section.settings.mobile_faq_border_width_unit}} {{section.settings.mobile_faq_border_style}} {{section.settings.mobile_faq_border_color}};
+                }
+                .attryb-faq-description {
+                  margin-top: 2em;
+                  margin-bottom: 2em;
+                }
+
+                .attryb-faq-checkbox {
+                  position: absolute;
+                  opacity: 0;
+                  z-index: -1;
+                }
+
+                .attryb-faq-tabs {
+                  overflow: hidden;
+                  {% if section.settings.mobile_faq_box_shadow_enable == true %}
+                  box-shadow: {{section.settings.mobile_faq_shadow_hor}}px {{section.settings.mobile_faq_shadow_ver}}px {{section.settings.mobile_faq_shadow_blur}}px {{section.settings.mobile_faq_shadow_spread}}px {{section.settings.mobile_faq_shadow_color}};
+                  {% else %}
+                  box-shadow: none;
+                  {% endif %}
+                }
+
+                .attryb-faq-tab {
+                  width: 100%;
+                  color: white;
+                  overflow: hidden;
+                }
+
+                .attryb-faq-tab-label {
+                  width: 100%;
+                  display: flex;
+                  justify-content: space-between;
+                  padding: 1em;
+                  font-weight: bold;
+                  background: {{section.settings.mobile_color_title1}};
+                  color: {{section.settings.mobile_color_title2}};
+                  cursor: pointer;
+                  font-weight: {{section.settings.mobile_faq_font_weight}};
+                }
+
+                .attryb-faq-tab-content {
+                  max-height: 0;
+                  padding: 0 1em;
+                  transition: all 0.5s ease;
+                  background: {{section.settings.mobile_color_title3}};
+                  color: {{section.settings.mobile_color_title4}};
+                }
+
+                .attryb-faq-tab-content p {
+                  margin: 0;
+                }
+
+                .attryb-faq-checkbox:checked ~ .attryb-faq-tab-content {
+                  max-height: 100vh;
+                  padding: 1em;
+                }
+              }
+
+            </style>
+
+            <div class="page-width attryb-faq-page-width">
+              <div class="attryb-faq-container">
+                <div class="attryb-faq-tabs">
+                  {% for faq in product.metafields.custom.faq.value %}
+                  {% assign item = faq %}
+
+                  <div class="attryb-faq-tab">
+                    {% if section.settings.faq_open == true %}
+                    <input type="checkbox" id="faq_checkbox_{{ forloop.index }}" class="attryb-faq-checkbox" checked>
+                    {% else %}
+                    <input type="checkbox" id="faq_checkbox_{{ forloop.index }}" class="attryb-faq-checkbox">
+                    {% endif %}
+                    <label for="faq_checkbox_{{ forloop.index }}" class="attryb-faq-tab-label">{{ item.question }}</label>
+                    <div class="attryb-faq-tab-content">{{ item.answer }}</div>
+                  </div>
+                  {% endfor %}
+                </div>
+              </div>
+            </div>
+
+                  {% schema %}
+                        {
+                          "name": "FAQ",
+                    "settings" : [
+                    {
+                              "type": "color",
+                              "id": "color_title1",
+                              "label": "Heading background color",
+                              "default": "#000"
+                            },
+                    {
+                              "type": "color",
+                              "id": "color_title2",
+                              "label": "Heading text color",
+                              "default": "#fff"
+                            },
+                    {
+                              "type": "color",
+                              "id": "color_title3",
+                              "label": "Answer background color",
+                              "default": "#fff"
+                            },
+                    {
+                              "type": "color",
+                              "id": "color_title4",
+                              "label": "Answer text color",
+                              "default": "#000"
+                            },
+                            {
+                              "type": "font_picker",
+                              "id": "faq_ff",
+                              "label": "Font Family",
+                              "default": "open_sans_n4"
+                            },
+                            {
+                              "type": "checkbox",
+                              "id": "faq_open",
+                              "label": "FAQs Always Open",
+                              "default": true
+                            },
+                    {
+                              "type": "number",
+                              "id": "font_size_1",
+                              "label": "Font Size",
+                              "default": 16
+                            },
+                    {
+                              "type": "select",
+                              "id": "font_size_unit",
+                              "label": "Font Size Unit",
+                              "options": [
+                                {
+                                  "value": "rem",
+                                  "label": "rem"
+                                },
+                                {
+                                  "value": "em",
+                                  "label": "em"
+                                },
+                                {
+                                  "value": "px",
+                                  "label": "px"
+                                }
+                              ],
+                              "default": "px"
+                            },
+                    {
+                              "type": "number",
+                              "id": "faq_width",
+                              "label": "FAQ width",
+                              "default": 80
+                            },
+                    {
+                              "type": "select",
+                              "id": "faq_width_unit",
+                              "label": "FAQ width Unit",
+                              "options": [
+                                {
+                                  "value": "rem",
+                                  "label": "rem"
+                                },
+                                {
+                                  "value": "em",
+                                  "label": "em"
+                                },
+                                {
+                                  "value": "px",
+                                  "label": "px"
+                                },
+                      {
+                                  "value": "%",
+                                  "label": "%"
+                                }
+                              ],
+                              "default": "%"
+                            },
+                    {
+                              "type": "select",
+                              "id": "faq_position",
+                              "label": "FAQ position",
+                              "options": [
+                                {
+                                  "value": "left",
+                                  "label": "left"
+                                },
+                                {
+                                  "value": "right",
+                                  "label": "right"
+                                },
+                                {
+                                  "value": "center",
+                                  "label": "center"
+                                }
+                              ],
+                              "default": "center"
+                            },
+                    {
+                              "type": "range",
+                              "id": "faq_font_weight",
+                              "min": 100,
+                              "max": 900,
+                              "step": 100,
+                              "label": "Font Weight",
+                              "default": 400
+                            },
+                    {
+                              "type": "number",
+                              "id": "faq_border_radius",
+                              "label": "Border Radius",
+                              "default": 4
+                            },
+                    {
+                              "type": "select",
+                              "id": "border_radius_unit",
+                              "label": "Border Radius Unit",
+                              "options": [
+                                {
+                                  "value": "rem",
+                                  "label": "rem"
+                                },
+                                {
+                                  "value": "em",
+                                  "label": "em"
+                                },
+                                {
+                                  "value": "px",
+                                  "label": "px"
+                                },
+                      {
+                                  "value": "%",
+                                  "label": "%"
+                                }
+                              ],
+                              "default": "px"
+                            },
+                    {
+                              "type": "number",
+                              "id": "faq_padding",
+                              "label": "FAQ Container Padding",
+                              "default": 0
+                            },
+                    {
+                              "type": "select",
+                              "id": "faq_padding_unit",
+                              "label": "FAQ Padding Unit",
+                              "options": [
+                                {
+                                  "value": "rem",
+                                  "label": "rem"
+                                },
+                                {
+                                  "value": "em",
+                                  "label": "em"
+                                },
+                                {
+                                  "value": "px",
+                                  "label": "px"
+                                }
+                              ],
+                              "default": "rem"
+                            },
+                    {
+                              "type": "number",
+                              "id": "faq_margin",
+                              "label": "FAQ Container Margin",
+                              "default": 0
+                            },
+                    {
+                              "type": "select",
+                              "id": "faq_margin_unit",
+                              "label": "FAQ Margin Unit",
+                              "options": [
+                                {
+                                  "value": "rem",
+                                  "label": "rem"
+                                },
+                                {
+                                  "value": "em",
+                                  "label": "em"
+                                },
+                                {
+                                  "value": "px",
+                                  "label": "px"
+                                }
+                              ],
+                              "default": "rem"
+                            },
+                    {
+                              "type": "number",
+                              "id": "faq_line_height",
+                              "label": "FAQ Container Line Height",
+                              "default": 2
+                            },
+                    {
+                              "type": "select",
+                              "id": "faq_line_height_unit",
+                              "label": "FAQ Line Height Unit",
+                              "options": [
+                                {
+                                  "value": "rem",
+                                  "label": "rem"
+                                },
+                                {
+                                  "value": "em",
+                                  "label": "em"
+                                },
+                                {
+                                  "value": "px",
+                                  "label": "px"
+                                }
+                              ],
+                              "default": "rem"
+                            },
+                    {
+                              "type": "number",
+                              "id": "faq_border_width",
+                              "label": "FAQ Border Width",
+                              "default": 1
+                            },
+                    {
+                              "type": "select",
+                              "id": "faq_border_width_unit",
+                              "label": "FAQ Border Width Unit",
+                              "options": [
+                                {
+                                  "value": "rem",
+                                  "label": "rem"
+                                },
+                                {
+                                  "value": "em",
+                                  "label": "em"
+                                },
+                                {
+                                  "value": "px",
+                                  "label": "px"
+                                }
+                              ],
+                              "default": "px"
+                            },
+                    {
+                              "type": "select",
+                              "id": "faq_border_style",
+                              "label": "FAQ Border Style",
+                              "options": [
+                                {
+                                  "value": "dotted",
+                                  "label": "dotted"
+                                },
+                                {
+                                  "value": "dashed",
+                                  "label": "dashed"
+                                },
+                                {
+                                  "value": "solid",
+                                  "label": "solid"
+                                },
+                      {
+                                  "value": "double",
+                                  "label": "double"
+                                },
+                      {
+                                  "value": "groove",
+                                  "label": "groove"
+                                },
+                      {
+                                  "value": "ridge",
+                                  "label": "ridge"
+                                },
+                      {
+                                  "value": "inset",
+                                  "label": "inset"
+                                },
+                      {
+                                  "value": "outset",
+                                  "label": "outset"
+                                },
+                      {
+                                  "value": "none",
+                                  "label": "none"
+                                },
+                      {
+                                  "value": "hidden",
+                                  "label": "hidden"
+                                }
+                              ],
+                              "default": "solid"
+                            },
+                    {
+                              "type": "color",
+                              "id": "faq_border_color",
+                              "label": "FAQ Border Color",
+                              "default": "#000"
+                            },
+                    {
+                              "type": "checkbox",
+                              "id": "faq_box_shadow_enable",
+                              "label": "FAQs Box Shadow",
+                              "default": true
+                            },
+                    {
+                              "type": "range",
+                              "id": "faq_shadow_hor",
+                              "min": 0,
+                              "max": 30,
+                              "step": 1,
+                              "label": "FAQ Box Shadow Horizontal",
+                              "default": 0
+                            },
+                    {
+                              "type": "range",
+                              "id": "faq_shadow_ver",
+                              "min": 0,
+                              "max": 30,
+                              "step": 1,
+                              "label": "FAQ Box Shadow Vertical",
+                              "default": 0
+                            },
+                    {
+                              "type": "range",
+                              "id": "faq_shadow_blur",
+                              "min": 0,
+                              "max": 30,
+                              "step": 1,
+                              "label": "FAQ Box Shadow Blur",
+                              "default": 3
+                            },
+                    {
+                              "type": "range",
+                              "id": "faq_shadow_spread",
+                              "min": 0,
+                              "max": 30,
+                              "step": 1,
+                              "label": "FAQ Box Shadow Spread",
+                              "default": 4
+                            },
+                    {
+                              "type": "color",
+                              "id": "faq_shadow_color",
+                              "label": "FAQ Box Shadow Color",
+                              "default": "#EAEAEA"
+                            },
+                    {
+                              "type": "color",
+                              "id": "mobile_color_title1",
+                              "label": "Mobile - Heading background color",
+                              "default": "#000"
+                            },
+                    {
+                              "type": "color",
+                              "id": "mobile_color_title2",
+                              "label": "Mobile - Heading text color",
+                              "default": "#fff"
+                            },
+                    {
+                              "type": "color",
+                              "id": "mobile_color_title3",
+                              "label": "Mobile - Answer background color",
+                              "default": "#fff"
+                            },
+                    {
+                              "type": "color",
+                              "id": "mobile_color_title4",
+                              "label": "Mobile - Answer text color",
+                              "default": "#000"
+                            },
+                            {
+                              "type": "font_picker",
+                              "id": "mobile_faq_ff",
+                              "label": "Mobile - Font Family",
+                              "default": "open_sans_n4"
+                            },
+                    {
+                              "type": "number",
+                              "id": "mobile_font_size_1",
+                              "label": "Mobile - Font Size",
+                              "default": 16
+                            },
+                    {
+                              "type": "select",
+                              "id": "mobile_font_size_unit",
+                              "label": "Mobile - Font Size Unit",
+                              "options": [
+                                {
+                                  "value": "rem",
+                                  "label": "rem"
+                                },
+                                {
+                                  "value": "em",
+                                  "label": "em"
+                                },
+                                {
+                                  "value": "px",
+                                  "label": "px"
+                                }
+                              ],
+                              "default": "px"
+                            },
+                    {
+                              "type": "number",
+                              "id": "mobile_faq_width",
+                              "label": "Mobile - FAQ width",
+                              "default": 80
+                            },
+                    {
+                              "type": "select",
+                              "id": "mobile_faq_width_unit",
+                              "label": "Mobile - FAQ width Unit",
+                              "options": [
+                                {
+                                  "value": "rem",
+                                  "label": "rem"
+                                },
+                                {
+                                  "value": "em",
+                                  "label": "em"
+                                },
+                                {
+                                  "value": "px",
+                                  "label": "px"
+                                },
+                      {
+                                  "value": "%",
+                                  "label": "%"
+                                }
+                              ],
+                              "default": "%"
+                            },
+                    {
+                              "type": "select",
+                              "id": "mobile_faq_position",
+                              "label": "Mobile - FAQ position",
+                              "options": [
+                                {
+                                  "value": "left",
+                                  "label": "left"
+                                },
+                                {
+                                  "value": "right",
+                                  "label": "right"
+                                },
+                                {
+                                  "value": "center",
+                                  "label": "center"
+                                }
+                              ],
+                              "default": "center"
+                            },
+                    {
+                              "type": "range",
+                              "id": "mobile_faq_font_weight",
+                              "min": 100,
+                              "max": 900,
+                              "step": 100,
+                              "label": "Mobile - Font Weight",
+                              "default": 400
+                            },
+                    {
+                              "type": "number",
+                              "id": "mobile_faq_border_radius",
+                              "label": "Mobile - Border Radius",
+                              "default": 4
+                            },
+                    {
+                              "type": "select",
+                              "id": "mobile_border_radius_unit",
+                              "label": "Mobile - Border Radius Unit",
+                              "options": [
+                                {
+                                  "value": "rem",
+                                  "label": "rem"
+                                },
+                                {
+                                  "value": "em",
+                                  "label": "em"
+                                },
+                                {
+                                  "value": "px",
+                                  "label": "px"
+                                },
+                      {
+                                  "value": "%",
+                                  "label": "%"
+                                }
+                              ],
+                              "default": "px"
+                            },
+                    {
+                              "type": "number",
+                              "id": "mobile_faq_padding",
+                              "label": "Mobile - FAQ Container Padding",
+                              "default": 0
+                            },
+                    {
+                              "type": "select",
+                              "id": "mobile_faq_padding_unit",
+                              "label": "Mobile - FAQ Padding Unit",
+                              "options": [
+                                {
+                                  "value": "rem",
+                                  "label": "rem"
+                                },
+                                {
+                                  "value": "em",
+                                  "label": "em"
+                                },
+                                {
+                                  "value": "px",
+                                  "label": "px"
+                                }
+                              ],
+                              "default": "rem"
+                            },
+                    {
+                              "type": "number",
+                              "id": "mobile_faq_margin",
+                              "label": "Mobile - FAQ Container Margin",
+                              "default": 0
+                            },
+                    {
+                              "type": "select",
+                              "id": "mobile_faq_margin_unit",
+                              "label": "Mobile - FAQ Margin Unit",
+                              "options": [
+                                {
+                                  "value": "rem",
+                                  "label": "rem"
+                                },
+                                {
+                                  "value": "em",
+                                  "label": "em"
+                                },
+                                {
+                                  "value": "px",
+                                  "label": "px"
+                                }
+                              ],
+                              "default": "rem"
+                            },
+                    {
+                              "type": "number",
+                              "id": "mobile_faq_line_height",
+                              "label": "Mobile - FAQ Container Line Height",
+                              "default": 2
+                            },
+                    {
+                              "type": "select",
+                              "id": "mobile_faq_line_height_unit",
+                              "label": "Mobile - FAQ Line Height Unit",
+                              "options": [
+                                {
+                                  "value": "rem",
+                                  "label": "rem"
+                                },
+                                {
+                                  "value": "em",
+                                  "label": "em"
+                                },
+                                {
+                                  "value": "px",
+                                  "label": "px"
+                                }
+                              ],
+                              "default": "rem"
+                            },
+                    {
+                              "type": "number",
+                              "id": "mobile_faq_border_width",
+                              "label": "Mobile - FAQ Border Width",
+                              "default": 1
+                            },
+                    {
+                              "type": "select",
+                              "id": "mobile_faq_border_width_unit",
+                              "label": "Mobile - FAQ Border Width Unit",
+                              "options": [
+                                {
+                                  "value": "rem",
+                                  "label": "rem"
+                                },
+                                {
+                                  "value": "em",
+                                  "label": "em"
+                                },
+                                {
+                                  "value": "px",
+                                  "label": "px"
+                                }
+                              ],
+                              "default": "px"
+                            },
+                    {
+                              "type": "select",
+                              "id": "mobile_faq_border_style",
+                              "label": "Mobile - FAQ Border Style",
+                              "options": [
+                                {
+                                  "value": "dotted",
+                                  "label": "dotted"
+                                },
+                                {
+                                  "value": "dashed",
+                                  "label": "dashed"
+                                },
+                                {
+                                  "value": "solid",
+                                  "label": "solid"
+                                },
+                      {
+                                  "value": "double",
+                                  "label": "double"
+                                },
+                      {
+                                  "value": "groove",
+                                  "label": "groove"
+                                },
+                      {
+                                  "value": "ridge",
+                                  "label": "ridge"
+                                },
+                      {
+                                  "value": "inset",
+                                  "label": "inset"
+                                },
+                      {
+                                  "value": "outset",
+                                  "label": "outset"
+                                },
+                      {
+                                  "value": "none",
+                                  "label": "none"
+                                },
+                      {
+                                  "value": "hidden",
+                                  "label": "hidden"
+                                }
+                              ],
+                              "default": "none"
+                            },
+                    {
+                              "type": "color",
+                              "id": "mobile_faq_border_color",
+                              "label": "Mobile - FAQ Border Color",
+                              "default": "#000"
+                            },
+                    {
+                              "type": "checkbox",
+                              "id": "mobile_faq_box_shadow_enable",
+                              "label": "Mobile FAQs Box Shadow",
+                              "default": true
+                            },
+                    {
+                              "type": "range",
+                              "id": "mobile_faq_shadow_hor",
+                              "min": 0,
+                              "max": 30,
+                              "step": 1,
+                              "label": "Mobile - FAQ Box Shadow Horizontal",
+                              "default": 0
+                            },
+                    {
+                              "type": "range",
+                              "id": "mobile_faq_shadow_ver",
+                              "min": 0,
+                              "max": 30,
+                              "step": 1,
+                              "label": "Mobile - FAQ Box Shadow Vertical",
+                              "default": 0
+                            },
+                    {
+                              "type": "range",
+                              "id": "mobile_faq_shadow_blur",
+                              "min": 0,
+                              "max": 30,
+                              "step": 1,
+                              "label": "Mobile - FAQ Box Shadow Blur",
+                              "default": 3
+                            },
+                    {
+                              "type": "range",
+                              "id": "mobile_faq_shadow_spread",
+                              "min": 0,
+                              "max": 30,
+                              "step": 1,
+                              "label": "Mobile - FAQ Box Shadow Spread",
+                              "default": 4
+                            },
+                    {
+                              "type": "color",
+                              "id": "mobile_faq_shadow_color",
+                              "label": "Mobile - FAQ Box Shadow Color",
+                              "default": "#EAEAEA"
+                            }
+                    ],
+                          "tag": "section",
+                          "class": "spaced-section",
+                          "presets": [
+                            { "name": "FAQ Attryb" }
+                          ],
+                    "templates": ["product"]
+                        }
+                        {% endschema %}

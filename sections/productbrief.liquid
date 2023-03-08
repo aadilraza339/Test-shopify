@@ -1,0 +1,219 @@
+<style>
+               .attryb-about-product-page-width {
+                 display: flex;
+                 justify-content: {{section.settings.p_intro_position}};
+               }
+               .attryb-p_intro-container {
+                 font-size: {{section.settings.p_intro_font_size_1}}{{section.settings.p_intro_font_size_unit}};
+                 width: {{section.settings.p_intro_width}}{{section.settings.p_intro_width_unit}};
+                 padding: {{section.settings.p_intro_padding}}{{section.settings.p_intro_padding_unit}};
+                 margin: {{section.settings.p_intro_margin}}{{section.settings.p_intro_margin_unit}};
+                 line-height:{{section.settings.p_intro_line_height}}{{section.settings.p_intro_line_height_unit}};
+                 text-align: {{section.settings.p_intro_line_height}}{{section.settings.p_intro_line_height_unit}};
+
+               }
+               .attryb-p_intro-description >p {
+                 margin-top: 2em;
+                 margin-bottom: 2em;
+                 color:{{section.settings.p_intro_color_title4}};
+                 font-family:{{section.settings.p_intro_ff}};
+               }
+             </style>
+
+             <div class="page-width attryb-about-product-page-width">
+               <div class="attryb-p_intro-container">
+                 <div class="about_heading">{{section.settings.info_heading}}</div>
+                 <div class="attryb-p_intro-description">
+
+   <p>{{ product.metafields.product.brief.value }}</p>
+               </div>
+             </div>
+           </div>
+
+                 {% schema %}
+                         {
+                           "name": "Product-Brief",
+                     "settings" : [
+
+                     {
+                               "type": "color",
+                               "id": "p_intro_color_title4",
+                               "label": "Description text color",
+                               "default": "#000"
+                             },
+                       {
+                             "type": "text",
+                             "id": "info_heading",
+                             "label": "Section Heading",
+                             "placeholder": "Enter the heading here"
+                             },
+
+
+                     {
+                               "type": "number",
+                               "id": "p_intro_font_size_1",
+                               "label": "Font Size",
+                               "default": 16
+                             },
+                     {
+                               "type": "select",
+                               "id": "p_intro_font_size_unit",
+                               "label": "Font Size Unit",
+                               "options": [
+                                 {
+                                   "value": "rem",
+                                   "label": "rem"
+                                 },
+                                 {
+                                   "value": "em",
+                                   "label": "em"
+                                 },
+                                 {
+                                   "value": "px",
+                                   "label": "px"
+                                 }
+                               ],
+                               "default": "px"
+                             },
+                     {
+                               "type": "range",
+                               "id": "p_intro_width",
+                               "label": "width",
+                               "min": 10,
+                               "max": 100,
+                               "step": 5,
+                               "label": "width",
+                               "default": 100
+                             },
+                     {
+                               "type": "select",
+                               "id": "p_intro_width_unit",
+                               "label": "p_intro width Unit",
+                               "options": [
+                                 {
+                                   "value": "rem",
+                                   "label": "rem"
+                                 },
+                                 {
+                                   "value": "em",
+                                   "label": "em"
+                                 },
+                                 {
+                                   "value": "px",
+                                   "label": "px"
+                                 },
+                       {
+                                   "value": "%",
+                                   "label": "%"
+                                 }
+                               ],
+                               "default": "%"
+                             },
+                     {
+                               "type": "select",
+                               "id": "p_intro_position",
+                               "label": "Container position",
+                               "options": [
+                                 {
+                                   "value": "left",
+                                   "label": "left"
+                                 },
+                                 {
+                                   "value": "right",
+                                   "label": "right"
+                                 },
+                                 {
+                                   "value": "center",
+                                   "label": "center"
+                                 }
+                               ],
+                               "default": "center"
+                             },
+                     {
+                               "type": "number",
+                               "id": "p_intro_padding",
+                               "label": "Container Padding",
+                               "default": 0
+                             },
+                     {
+                               "type": "select",
+                               "id": "p_intro_padding_unit",
+                               "label": "Container Padding Unit",
+                               "options": [
+                                 {
+                                   "value": "rem",
+                                   "label": "rem"
+                                 },
+                                 {
+                                   "value": "em",
+                                   "label": "em"
+                                 },
+                                 {
+                                   "value": "px",
+                                   "label": "px"
+                                 }
+                               ],
+                               "default": "rem"
+                             },
+                     {
+                               "type": "number",
+                               "id": "p_intro_margin",
+                               "label": "Container Margin",
+                               "default": 0
+                             },
+                     {
+                               "type": "select",
+                               "id": "p_intro_margin_unit",
+                               "label": "Container Margin Unit",
+                               "options": [
+                                 {
+                                   "value": "rem",
+                                   "label": "rem"
+                                 },
+                                 {
+                                   "value": "em",
+                                   "label": "em"
+                                 },
+                                 {
+                                   "value": "px",
+                                   "label": "px"
+                                 }
+                               ],
+                               "default": "rem"
+                             },
+                     {
+                               "type": "number",
+                               "id": "p_intro_line_height",
+                               "label": "Line Height",
+                               "default": 2
+                             },
+                     {
+                               "type": "select",
+                               "id": "p_intro_line_height_unit",
+                               "label": "Line Height Unit",
+                               "options": [
+                                 {
+                                   "value": "rem",
+                                   "label": "rem"
+                                 },
+                                 {
+                                   "value": "em",
+                                   "label": "em"
+                                 },
+                                 {
+                                   "value": "px",
+                                   "label": "px"
+                                 }
+                               ],
+                               "default": "rem"
+                             }
+
+                     ],
+                           "tag": "section",
+                           "class": "section",
+                           "presets": [
+                             { "name": "Product-Brief-Attryb" }
+                           ],
+                     "templates": ["product"]
+                         }
+                         {% endschema %}

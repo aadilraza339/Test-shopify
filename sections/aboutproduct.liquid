@@ -1,0 +1,232 @@
+<style>
+                .attryb-about-product-page-width {
+                  display: flex;
+                  justify-content: {{section.settings.pd_position}};
+                }
+                .attryb-pd-container {
+                  font-size: {{section.settings.pd_font_size_1}}{{section.settings.pd_font_size_unit}};
+                  width: {{section.settings.pd_width}}{{section.settings.pd_width_unit}};
+                  padding: {{section.settings.pd_padding}}{{section.settings.pd_padding_unit}};
+                  margin: {{section.settings.pd_margin}}{{section.settings.pd_margin_unit}};
+                  line-height:{{section.settings.pd_line_height}}{{section.settings.pd_line_height_unit}};
+
+                }
+                .attryb-pd-description >p {
+                  margin-top: 2em;
+                  margin-bottom: 2em;
+                  color:{{section.settings.pd_color_title4}};
+                  font-family:{{section.settings.pd_ff}};
+                }
+                .about_heading{
+                font-size: {{section.settings.pd_font_size_heading}}{{section.settings.pd_font_size_unit}};
+                color:{{section.settings.pd_color_title1}};
+                font-family:{{section.settings.pd_ff}};
+                }
+              </style>
+
+              <div class="page-width attryb-about-product-page-width">
+                <div class="attryb-pd-container">
+                <div class="about_heading">{{section.settings.about_heading}}</div>
+                  <div class="attryb-pd-description">
+                      <p>{{ product.metafields.product.about.value }}</p>
+                  </div>
+                </div>
+              </div>
+
+                   {% schema %}
+                          {
+                            "name": "Product-About",
+                      "settings" : [
+                      {
+                                "type": "color",
+                                "id": "pd_color_title1",
+                                "label": "Heading text color",
+                                "default": "#000"
+                              },
+                              {
+                              "type": "text",
+                              "id": "about_heading",
+                              "label": "Section Heading",
+                              "placeholder": "Enter the heading here"
+                              },
+                      {
+                                "type": "color",
+                                "id": "pd_color_title4",
+                                "label": "Description text color",
+                                "default": "#000"
+                              },
+                              {
+                                "type": "number",
+                                "id": "pd_font_size_heading",
+                                "label": "Heading Font Size",
+                                "default": 16
+                              },
+
+                      {
+                                "type": "number",
+                                "id": "pd_font_size_1",
+                                "label": "Font Size",
+                                "default": 16
+                              },
+                      {
+                                "type": "select",
+                                "id": "pd_font_size_unit",
+                                "label": "Font Size Unit",
+                                "options": [
+                                  {
+                                    "value": "rem",
+                                    "label": "rem"
+                                  },
+                                  {
+                                    "value": "em",
+                                    "label": "em"
+                                  },
+                                  {
+                                    "value": "px",
+                                    "label": "px"
+                                  }
+                                ],
+                                "default": "px"
+                              },
+                      {
+                                "type": "range",
+                                "id": "pd_width",
+                                "label": "width",
+                                "min": 10,
+                                "max": 100,
+                                "step": 5,
+                                "label": "width",
+                                "default": 100
+                              },
+                      {
+                                "type": "select",
+                                "id": "pd_width_unit",
+                                "label": "pd width Unit",
+                                "options": [
+                                  {
+                                    "value": "rem",
+                                    "label": "rem"
+                                  },
+                                  {
+                                    "value": "em",
+                                    "label": "em"
+                                  },
+                                  {
+                                    "value": "px",
+                                    "label": "px"
+                                  },
+                        {
+                                    "value": "%",
+                                    "label": "%"
+                                  }
+                                ],
+                                "default": "%"
+                              },
+                      {
+                                "type": "select",
+                                "id": "pd_position",
+                                "label": "Container position",
+                                "options": [
+                                  {
+                                    "value": "left",
+                                    "label": "left"
+                                  },
+                                  {
+                                    "value": "right",
+                                    "label": "right"
+                                  },
+                                  {
+                                    "value": "center",
+                                    "label": "center"
+                                  }
+                                ],
+                                "default": "center"
+                              },
+                      {
+                                "type": "number",
+                                "id": "pd_padding",
+                                "label": "Container Padding",
+                                "default": 0
+                              },
+                      {
+                                "type": "select",
+                                "id": "pd_padding_unit",
+                                "label": "Container Padding Unit",
+                                "options": [
+                                  {
+                                    "value": "rem",
+                                    "label": "rem"
+                                  },
+                                  {
+                                    "value": "em",
+                                    "label": "em"
+                                  },
+                                  {
+                                    "value": "px",
+                                    "label": "px"
+                                  }
+                                ],
+                                "default": "rem"
+                              },
+                      {
+                                "type": "number",
+                                "id": "pd_margin",
+                                "label": "Container Margin",
+                                "default": 0
+                              },
+                      {
+                                "type": "select",
+                                "id": "pd_margin_unit",
+                                "label": "Container Margin Unit",
+                                "options": [
+                                  {
+                                    "value": "rem",
+                                    "label": "rem"
+                                  },
+                                  {
+                                    "value": "em",
+                                    "label": "em"
+                                  },
+                                  {
+                                    "value": "px",
+                                    "label": "px"
+                                  }
+                                ],
+                                "default": "rem"
+                              },
+                      {
+                                "type": "number",
+                                "id": "pd_line_height",
+                                "label": "Container Line Height",
+                                "default": 2
+                              },
+                      {
+                                "type": "select",
+                                "id": "pd_line_height_unit",
+                                "label": "Container Line Height Unit",
+                                "options": [
+                                  {
+                                    "value": "rem",
+                                    "label": "rem"
+                                  },
+                                  {
+                                    "value": "em",
+                                    "label": "em"
+                                  },
+                                  {
+                                    "value": "px",
+                                    "label": "px"
+                                  }
+                                ],
+                                "default": "rem"
+                              }
+
+                      ],
+                            "tag": "section",
+                            "class": "section",
+                            "presets": [
+                              { "name": "Product-About-Attryb" }
+                            ],
+                      "templates": ["product"]
+                          }
+                          {% endschema %}
